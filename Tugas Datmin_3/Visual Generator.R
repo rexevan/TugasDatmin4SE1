@@ -14,6 +14,8 @@ pl <- as.tibble(england) %>%
   filter(division == 1, 
          Season >= 2007 & Season <= 2016)
 
+pl
+
 # let's talk about Last Season 
 # Hitung Total selisih gol dan Total poin setiap tim 
 by_date <- pl %>% 
@@ -35,6 +37,8 @@ by_date <- pl %>%
   group_by(Date, Season, team) %>% 
   summarise(GD = sum(goaldif), 
             P  = sum(points)) 
+
+by_date
 
 # end of the season table
 pl2016 <- by_date %>%

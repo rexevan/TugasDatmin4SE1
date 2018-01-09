@@ -14,6 +14,8 @@ pl <- as.tibble(england) %>%
   filter(division == 1, 
          Season >= 2007 & Season <= 2016)
 
+pl 
+
 # Hitung Total selisih gol dan Total poin setiap tim 
 pl_total <- pl %>% 
   #filter(Season == 2016) %>% 
@@ -56,7 +58,8 @@ ggplot(pl_total, aes(x = GD, y = P)) +
     title = "Premier League '07/08 - '16/17",
     subtitle = "Skala Rata-rata"
   ) + 
-  theme(text = element_text(size = 12))
+  theme(text = element_text(size = 12)) + 
+  geom_label_repel(aes(label = team))
 
 # Building Cluster -----------
 
@@ -78,34 +81,32 @@ pl_kmeans %>%
     y = "Sum Square Within Varians"
   )
 
-pl_kmeans_gg <- pl_kmeans %>% 
-  filter(num_klaster <= 5) %>% 
-  mutate(kmeans_graph = map2(k_means, data,  ~ broom::augment(.x, .y))) %>% 
-  select(num_klaster, kmeans_graph) %>% 
-  unnest()
-
-pl_kmeans_gg %>% 
+pl_kmeans %>% 
+  filter(num_klaster == 5) %>% 
+  mutate(augment = map2(k_means, list(pl_total), ~ broom::augment(.x, .y))) %>% 
+  select(augment) %>% 
+  unnest() %>% 
   ggplot(aes(x = GD, y = P)) + 
   geom_point(aes(col = .cluster), size = 3) + 
-  facet_wrap(~ num_klaster) + 
   theme(legend.position = "top") + 
   labs(
     x = "Goal Difference", 
     y = "Points", 
     color = "Cluster", 
     title = "Premier League Clustering"
-  )
+  ) + 
+  geom_label_repel(aes(label = team))
 
 
 ## Hirarki -------------------
-pl_total_df <- pl_total %>% 
-  as.data.frame(row.names = team)
-
-hc <- dist(pl_total_df[,-1]) %>% 
+hc <- pl_total %>% 
+  as.data.frame() %>% 
+  column_to_rownames(var = "team") %>% 
+  dist() %>% 
   hclust(method = "complete")
 
 plot(hc)
-cutree(hc, k = 4)
+cutree(hc, k = 3)
 
 # DBSCAN -----------------------
 library(dbscan)
@@ -114,4 +115,5 @@ pl_db <- dbscan(pl_total[,-1], eps = 10, minPts = 3)
 pl_total$db = pl_db$cluster
 
 ggplot(pl_total, aes(GD, P)) + 
-  geom_point(size = 3, aes(color = factor(db)))
+  geom_point(size = 3, aes(color = factor(db))) + 
+  geom_label_repel(aes(label = team))
