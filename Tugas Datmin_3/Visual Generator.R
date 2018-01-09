@@ -1,5 +1,5 @@
 # install paket
-# install.packages("tidverse", "devtools")
+# install.packages("tidyverse", "devtools")
 # devtools::install_github('jalapic/engsoccerdata', username = "jalapic")
 
 library(tidyverse)
