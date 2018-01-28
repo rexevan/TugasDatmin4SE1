@@ -112,7 +112,7 @@ cutree(hc, k = 3)
 library(dbscan)
 pl_db <- dbscan(pl_total[,-1], eps = 10, minPts = 3)
 
-pl_total$db = pl_db$cluster
+pl_total$db <- pl_db$cluster
 
 ggplot(pl_total, aes(GD, P)) + 
   geom_point(size = 3, aes(color = factor(db))) + 
