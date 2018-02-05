@@ -17,20 +17,20 @@ colnames(hepatitis) <- hepatitis_header
 # atur jenis masing-masing kolom 
 hepatitis <- hepatitis %>% 
   mutate(
-    Class = as.factor(Class),
-    SEX = as.factor(SEX),
-    STEROID = as.factor(STEROID),
-    ANTIVIRALS = as.factor(ANTIVIRALS),
-    FATIGUE = as.factor(FATIGUE),
-    MALAISE = as.factor(MALAISE),
-    ANOREXIA = as.factor(ANOREXIA),
-    LIVER_BIG = as.factor(LIVER_BIG),
-    LIVER_FIRM = as.factor(LIVER_FIRM),
+    Class           = as.factor(Class),
+    SEX             = as.factor(SEX),
+    STEROID         = as.factor(STEROID),
+    ANTIVIRALS      = as.factor(ANTIVIRALS),
+    FATIGUE         = as.factor(FATIGUE),
+    MALAISE         = as.factor(MALAISE),
+    ANOREXIA        = as.factor(ANOREXIA),
+    LIVER_BIG       = as.factor(LIVER_BIG),
+    LIVER_FIRM      = as.factor(LIVER_FIRM),
     SPLEEN_PALPABLE = as.factor(SPLEEN_PALPABLE),
-    SPIDERS = as.factor(SPIDERS),
-    ASCITIES = as.factor(ASCITIES),
-    VARICIES = as.factor(VARICIES),
-    HISTOLOGY = as.factor(HISTOLOGY)
+    SPIDERS         = as.factor(SPIDERS),
+    ASCITIES        = as.factor(ASCITIES),
+    VARICIES        = as.factor(VARICIES),
+    HISTOLOGY       = as.factor(HISTOLOGY)
   )
 
 # Fungsi untuk mengisi missing value 

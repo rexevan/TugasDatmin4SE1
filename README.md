@@ -1,7 +1,7 @@
 # TugasDatmin4SE1
 Kompilasi Tugas Data Mining (Kelompok maupun Individu) Saya. 
 
-Prefix pertama dari setiap file menunjukkan urutan keberapa tugasnya. Contoh, 01_xxx untuk tugas pertama, 02_xxx untuk tugas kedua, dst.
+Setiap tugas berada pada foldernya masing-masing. Tugas pertama ada di folder Tugas_1, tugas kedua di folder Tugas_2, dst.
 
 ## Tugas 1 
 Penerapan *Decision Tree* dan *Naive Bayesian* dalam klasifikasi.
